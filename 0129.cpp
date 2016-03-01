@@ -54,12 +54,23 @@ int main(int argc, char const *argv[]){
 				Vector2 s_ = s.at(j) - w.at(i);
 				float dot_ts = Vector2::Dot(v/v.Length(), s_);
 				float dot_ss = Vector2::Dot(s_, s_);
-				float val = dot_ts * dot_ts - dot_ss + r.at(i) * r.at(i);//
-				float val_sq = sqrtf(val);
-				float k1 = -dot_ts + val_sq;
-				float k2 = -dot_ts - val_sq;
-				bool k_flag = val >= 0 && k1 >= 0 && k2 >= 0 && v.Length() >= s_.Length();	//衝突してれば正
-
+				float val = dot_ts * dot_ts - dot_ss + r.at(i) * r.at(i);
+				bool k_flag;	//衝突していれば正
+				if(val >= 0){
+					float val_sq = sqrtf(val);
+					float k1 = -dot_ts + val_sq;
+					float k2 = -dot_ts - val_sq;
+					if (k1 >= 0 && k2 >= 0){
+						Vector2 v_identity = v / v.Length();
+						Vector2 p1(k1 * v_identity.x, k1 * v_identity.y);
+						Vector2 p2(k2 * v_identity.x, k2 * v_identity.y);
+						k_flag = v.Length() >= p1.Length() || v.Length() >= p2.Length();
+					} else {
+						k_flag = false;
+					}
+				} else {
+					k_flag = false;
+				}
 				Vector2 a = w.at(i) - s.at(j);
 				Vector2 b = w.at(i) - t.at(j);
 				float la = a.Length();
