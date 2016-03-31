@@ -19,7 +19,7 @@ int main(int argc, char const *argv[]){
 		} else {
 			y = (k[2]*k[3] - k[0]*k[5]) / (k[1]*k[3] - k[0]*k[4]);
 		}
-		//-0.00を回避する
+		//四捨五入
 		x = floor(x * 1000 + 0.5) * 0.001;
 		y = floor(y * 1000 + 0.5) * 0.001;
 		cout << fixed << setprecision(3) << x << ' ' << y << endl;
