@@ -1,13 +1,13 @@
 #include <iostream>
 using namespace std;
 using ull = unsigned long long;
-ull GCD(ull a, ull b);
-ull LCM(ull a, ull b, ull gcd);
+ull gcd(ull a, ull b);
+ull lcm(ull a, ull b, ull g);
 int main(int argc, char const *argv[]){
 	ull a,b;
 	while(cin >> a >> b){
-		ull gcd = GCD(a, b);
-		cout << gcd << " " << LCM(a, b, gcd) << endl;
+		ull g = gcd(a, b);
+		cout << g << " " << lcm(a, b, g) << endl;
 	}
 	return 0;
 }
@@ -19,6 +19,6 @@ ull GCD(ull a, ull b){
 	return a;
 }
 
-ull LCM(ull a, ull b, ull gcd){
-	return a * b / gcd;
+ull LCM(ull a, ull b, ull g){
+	return a * b / g;
 }
